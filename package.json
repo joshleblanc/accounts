@@ -1,0 +1,42 @@
+{
+  "name": "accounts",
+  "private": true,
+  "scripts": {
+    "start": "meteor run",
+    "test": "meteor test --once --driver-package meteortesting:mocha",
+    "test-app": "TEST_WATCH=1 meteor test --full-app --driver-package meteortesting:mocha",
+    "visualize": "meteor --production --extra-packages bundle-visualizer"
+  },
+  "dependencies": {
+    "@babel/plugin-proposal-decorators": "^7.8.3",
+    "@babel/runtime": "^7.8.4",
+    "@material-ui/core": "^4.9.10",
+    "@material-ui/icons": "^4.9.1",
+    "@types/express": "^4.17.6",
+    "@types/react-router-dom": "^5.1.4",
+    "express": "^4.17.1",
+    "formik": "^2.1.4",
+    "formik-material-ui": "^2.0.0-beta.1",
+    "meteor-node-stubs": "^1.0.0",
+    "notistack": "^0.9.9",
+    "query-string": "^6.12.1",
+    "react": "^16.13.0",
+    "react-dom": "^16.13.0",
+    "react-router-dom": "^5.1.2",
+    "yup": "^0.28.3"
+  },
+  "devDependencies": {
+    "@types/meteor": "^1.4.40",
+    "@types/mocha": "^5.2.7",
+    "@types/react": "^16.9.23",
+    "@types/react-dom": "^16.9.5",
+    "typescript": "^3.8.2"
+  },
+  "meteor": {
+    "mainModule": {
+      "client": "client/main.tsx",
+      "server": "server/main.ts"
+    },
+    "testModule": "tests/main.ts"
+  }
+}
