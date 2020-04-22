@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Layout from 'meteor/cereal:ui/components/Layout';
-import {Routes} from "/imports/ui/Routes";
-import {DrawerItems} from "/imports/ui/DrawerItems";
+import {Routes} from "./Routes";
+import {DrawerItems} from "./DrawerItems";
 import { Meteor } from 'meteor/meteor';
 
 export const App = () => {
