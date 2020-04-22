@@ -19,7 +19,7 @@ export const CreateApplication = () => {
   }, []);
   return(
     <>
-      <StyledButton onClick={openDialog}>Create Application</StyledButton>
+      <StyledButton variant={"contained"} color={"primary"} onClick={openDialog}>Create Application</StyledButton>
       <Dialog open={dialogOpen} onClose={closeDialog}>
         <DialogTitle>Create an application</DialogTitle>
         <DialogContent>

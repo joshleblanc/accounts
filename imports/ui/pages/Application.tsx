@@ -24,7 +24,6 @@ export const Application = () => {
       return applicationService.findById(id).fetch()[0]
     }
   });
-  console.log(application?.clientSecret);
   const handleSubmit = React.useCallback((values) => {
     Meteor.call('applications.update', id, values.name, (err?: Meteor.Error) => {
       if (err) {
