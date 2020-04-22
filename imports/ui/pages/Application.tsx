@@ -11,6 +11,7 @@ import StyledButton from "meteor/cereal:ui/components/StyledButton";
 import {Grid} from "@material-ui/core";
 import {ClientIdField} from "../components/applications/ClientIdField";
 import {ClientSecretField} from "../components/applications/ClientSecretField";
+import { AutoSave } from 'meteor/cereal:ui/components/AutoSave';
 
 const applicationService = new ApplicationService();
 
@@ -23,50 +24,52 @@ export const Application = () => {
       return applicationService.findById(id).fetch()[0]
     }
   });
-  const handleSubmit = React.useCallback((values, form) => {
-    form.setSubmitting(true);
+  console.log(application?.clientSecret);
+  const handleSubmit = React.useCallback((values) => {
     Meteor.call('applications.update', id, values.name, (err?: Meteor.Error) => {
       if(err) {
         enqueueSnackbar("Error updating application", { variant: "error" });
       } else {
         enqueueSnackbar("Application updated", { variant: "success"});
       }
-      form.setSubmitting(false);
     })
   }, [id]);
   if(!id || !application) return null;
 
   return(
     <PaddedPaper>
-      <Formik onSubmit={handleSubmit} initialValues={application}>
+      <Formik onSubmit={handleSubmit} initialValues={application} enableReinitialize>
         {
-          ({isSubmitting}) => (
-            <Form>
-              <Field
-                name={"name"}
-                label={"Name"}
-                component={TextField}
-                fullWidth
-                margin={"normal"}
-              />
-              <Grid container spacing={2}>
-                <Grid item xs={12} md={6}>
-                  <ClientIdField />
+          ({isSubmitting, values}) => {
+            return (
+              <Form>
+                <Field
+                  name={"name"}
+                  label={"Name"}
+                  component={TextField}
+                  fullWidth
+                  margin={"normal"}
+                />
+                <Grid container spacing={2}>
+                  <Grid item xs={12} md={6}>
+                    <ClientIdField/>
+                  </Grid>
+                  <Grid item xs={12} md={6}>
+                    <ClientSecretField/>
+                  </Grid>
                 </Grid>
-                <Grid item xs={12} md={6}>
-                  <ClientSecretField />
-                </Grid>
-              </Grid>
-              <StyledButton
-                type={"submit"}
-                loading={isSubmitting}
-                variant={"contained"}
-                color={"primary"}
-              >
-                Submit
-              </StyledButton>
-            </Form>
-          )
+                <StyledButton
+                  type={"submit"}
+                  loading={isSubmitting}
+                  variant={"contained"}
+                  color={"primary"}
+                >
+                  Submit
+                </StyledButton>
+                <AutoSave debounce={1000} onSave={handleSubmit} values={values} />
+              </Form>
+            )
+          }
         }
       </Formik>
     </PaddedPaper>

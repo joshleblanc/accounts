@@ -4,7 +4,7 @@ import { Mongo } from 'meteor/mongo';
 export class ApplicationService {
   create(name: string, creatorId: string) {
     const clientId = new Mongo.ObjectID().toHexString();
-    const clientSecret = new Mongo.ObjectID().toHexString();;
+    const clientSecret = new Mongo.ObjectID().toHexString();
     return ApplicationsCollection.insert({
       name,
       creatorId,
@@ -31,5 +31,15 @@ export class ApplicationService {
         name
       }
     });
+  }
+
+  regenerateClientSecret(id: string) {
+    return ApplicationsCollection.update({
+      _id: id
+    }, {
+      $set: {
+        clientSecret: new Mongo.ObjectID().toHexString()
+      }
+    })
   }
 }

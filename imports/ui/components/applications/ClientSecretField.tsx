@@ -5,6 +5,7 @@ import MuiTextField from '@material-ui/core/TextField'
 import {useSnackbar} from "notistack";
 import StyledButton from 'meteor/cereal:ui/components/StyledButton';
 import {makeStyles} from "@material-ui/core/styles";
+import {RegenerateClientSecretButton} from "./RegenerateClientSecretButton";
 
 const useStyles = makeStyles(theme => {
   return({
@@ -66,7 +67,7 @@ export const ClientSecretField = () => {
       >
         Copy
       </StyledButton>
-      <StyledButton loading={false} variant={"contained"} color={"primary"}>Regenerate</StyledButton>
+      <RegenerateClientSecretButton />
     </>
   )
 }

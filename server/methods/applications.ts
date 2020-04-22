@@ -28,5 +28,13 @@ Meteor.methods({
     }
 
     return applicationService.update(id, name);
+  },
+  'applications.regenerateClientSecret'(id: string) {
+    const application = applicationService.findById(id).fetch()[0];
+    const userId = this.userId;
+    if(!userId || !application || application.creatorId !== userId) {
+      throw new Meteor.Error("Not authorized");
+    }
+    return applicationService.regenerateClientSecret(id);
   }
 })
