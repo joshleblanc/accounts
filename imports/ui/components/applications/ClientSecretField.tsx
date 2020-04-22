@@ -3,10 +3,19 @@ import {Field} from "formik";
 import {TextField} from "formik-material-ui";
 import {useSnackbar} from "notistack";
 import StyledButton from 'meteor/cereal:ui/components/StyledButton';
-import {FormGroup} from "@material-ui/core";
+import {makeStyles} from "@material-ui/core/styles";
+
+const useStyles = makeStyles(theme => {
+  return({
+    copyButton: {
+      marginRight: theme.spacing(1)
+    }
+  })
+})
 
 export const ClientSecretField = () => {
   const { enqueueSnackbar } = useSnackbar();
+  const classes = useStyles();
   const inputRef = React.useRef(null);
   const handleClick = React.useCallback((e) => {
     const target = inputRef.current;
@@ -15,7 +24,7 @@ export const ClientSecretField = () => {
     (target as HTMLInputElement).select();
     document.execCommand('copy');
     e.target.focus();
-    enqueueSnackbar("Client ID copied!", { variant: "info" });
+    enqueueSnackbar("Client secret copied!", { variant: "info" });
   }, []);
   return(
     <>
@@ -29,19 +38,18 @@ export const ClientSecretField = () => {
         }}
         variant={"outlined"}
         margin={"normal"}
+        inputRef={inputRef}
       />
-      <FormGroup row>
-        <StyledButton
-          loading={false}
-          onClick={handleClick}
-          variant={"contained"}
-          color={"primary"}
-        >
-          Copy
-        </StyledButton>
-        <StyledButton loading={false} variant={"contained"} color={"primary"}>Regenerate</StyledButton>
-      </FormGroup>
-
+      <StyledButton
+        loading={false}
+        onClick={handleClick}
+        variant={"contained"}
+        color={"primary"}
+        className={classes.copyButton}
+      >
+        Copy
+      </StyledButton>
+      <StyledButton loading={false} variant={"contained"} color={"primary"}>Regenerate</StyledButton>
     </>
   )
 }
