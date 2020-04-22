@@ -5,10 +5,14 @@ import {Register} from "/imports/ui/pages/Register";
 import {Authorize} from "/imports/ui/pages/Authorize";
 import {Applications} from "./pages/Applications";
 import {Application} from "./pages/Application";
+import {Profile} from "./pages/Profile";
 
 export const Routes = () => {
   return(
     <Switch>
+      <Route path={"/profile"}>
+        <Profile />
+      </Route>
       <Route path={"/login"}>
         <Login />
       </Route>

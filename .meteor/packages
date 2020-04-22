@@ -24,3 +24,6 @@ cereal:ui
 reactive-dict
 cereal:reactive-render
 accounts-password
+bozhao:link-accounts
+lichthagel:accounts-discord
+service-configuration

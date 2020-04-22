@@ -4,6 +4,7 @@ import {WebApp} from "meteor/webapp";
 import express from 'express';
 import "./publications/users";
 import "./methods/applications";
+import { ServiceConfiguration } from 'meteor/service-configuration';
 
 const app = express();
 
@@ -24,3 +25,13 @@ Meteor.methods({
 
   }
 })
+
+ServiceConfiguration.configurations.upsert(
+  { service: "discord" },
+  {
+    $set: {
+      clientId: Meteor.settings.discord.id,
+      secret: Meteor.settings.discord.secret
+    }
+  }
+)
