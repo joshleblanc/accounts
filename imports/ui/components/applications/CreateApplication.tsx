@@ -23,7 +23,7 @@ export const CreateApplication = () => {
       <Dialog open={dialogOpen} onClose={closeDialog}>
         <DialogTitle>Create an application</DialogTitle>
         <DialogContent>
-          <DialogContentText>owuefhwef</DialogContentText>
+          <DialogContentText>Enter a name</DialogContentText>
           <TextField
             autoFocus
             margin={"dense"}
