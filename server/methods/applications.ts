@@ -13,5 +13,20 @@ Meteor.methods({
     if(user) {
       return applicationService.create(name, this.userId);
     }
+  },
+  'applications.update'(id: string, name: string) {
+    const application = applicationService.findById(id).fetch()[0];
+    const userId = this.userId;
+    if(!userId) {
+      throw new Meteor.Error("Not authorized");
+    }
+    if(!application) {
+      throw new Meteor.Error("Application not found");
+    }
+    if(application.creatorId !== userId) {
+      throw new Meteor.Error("Not authorized");
+    }
+
+    return applicationService.update(id, name);
   }
 })

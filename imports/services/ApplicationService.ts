@@ -22,4 +22,14 @@ export class ApplicationService {
   findById(id: string) {
     return ApplicationsCollection.find({ _id: id });
   }
+
+  update(id: string, name: string) {
+    return ApplicationsCollection.update({
+      _id: id
+    }, {
+      $set: {
+        name
+      }
+    });
+  }
 }
