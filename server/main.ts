@@ -1,5 +1,5 @@
 import { Meteor } from 'meteor/meteor';
-import {AccessToken} from "/imports/api/access_tokens";
+import {AccessToken} from "../imports/api/access_tokens";
 import {WebApp} from "meteor/webapp";
 import express from 'express';
 import "./publications/users";
@@ -8,7 +8,7 @@ import { ServiceConfiguration } from 'meteor/service-configuration';
 
 const app = express();
 
-app.post('/oauth/token', (req, res, next) => {
+app.post('/oauth/token', (_, res, next) => {
   res.send("okay");
   next();
 });
